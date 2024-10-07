@@ -7,8 +7,8 @@ from babel.numbers import format_currency
 sns.set(style='dark')
 
 # Load datasets
-day_df = pd.read_csv("data/day.csv", header=0)
-hour_df = pd.read_csv("data/hour.csv", header=0)
+day_df = pd.read_csv("../data/day.csv")
+hour_df = pd.read_csv("../data/hour.csv")
 
 datachange = [day_df, hour_df]
 
@@ -26,13 +26,6 @@ print(hour_df.describe(include=[np.number]))
 
 # Scale the temperature
 day_df['atemp_scaled'] = day_df['atemp'] * 50
-
-# Define the temperature ranges and corresponding labels
-bins = [0, 10, 20, 30, 40, 50]  # Temperature intervals in Celsius
-labels = ['Very Cold', 'Cold', 'Mild', 'Warm', 'Hot']
-
-# Create a new column 'atemp_range' by categorizing the scaled 'atemp'
-day_df['atemp_range'] = pd.cut(day_df['atemp_scaled'], bins=bins, labels=labels, right=False, include_lowest=True)
 
 # Helper functions to create grouped DataFrames
 def create_by_season_casual_df(df):
